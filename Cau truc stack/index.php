@@ -1,6 +1,6 @@
 <?php
 include_once "Stack.php";
- $myBooks = new Stack(6);
+ $myBooks = new Stack();
 
  $myBooks->push('Tony buoi sang');
  $myBooks->push('Nha gia kim');

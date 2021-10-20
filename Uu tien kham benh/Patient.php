@@ -1,9 +1,11 @@
+
 <?php
 
 class Patient
 {
-public $name;
-public $code;
+    public $name;
+    public $code;
+    public $next;
 
     /**
      * @param $name
@@ -13,40 +15,10 @@ public $code;
     {
         $this->name = $name;
         $this->code = $code;
+        $this->next = null;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
+    function readNode()
     {
-        return $this->name;
+        return 'Name: '.$this->name.' Code: '.$this->code;
     }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * @param mixed $code
-     */
-    public function setCode($code): void
-    {
-        $this->code = $code;
-    }
-
-
-
 }

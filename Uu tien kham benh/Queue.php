@@ -1,61 +1,64 @@
 <?php
 include_once "Patient.php";
 
-class Queue
-{
-    const VIP1 =1;
-    const VIP2 =4;
-    const VIP3 =5;
-    const NORMAL = 6;
+class Queue {
+    private $firstNode;
+    private $lastNode;
 
-public array $queueList;
-public int $size;
-
-    public function __construct($size)
-    {
-        $this->queueList = [self::VIP1=>[], self::VIP2=>[], self::VIP3=>[], self::NORMAL=>[]];
-        $this->size = $size;
+    function __construct() {
+        $this->firstNode= null;
+        $this->lastNod =null;
     }
+    function insertFirst($data) {
+        $data->next = $this->firstNode;
+        $this->firstNode= $data;
 
-    public function isEmpty()
-    {
-        return count($this->queueList)<=0;
-    }
-
-    public function isFull()
-    {
-        return count($this->queueList) >= $this->size;
-    }
-
-    public function enqueue($name,$code)
-    {
-        if ($this->isFull()) {
-            echo "This queue is full";
-        } else {
-            $patient = new Patient($name, $code);
-            array_push($this->queueList[$code], $patient);
-            $this->size++;
+        if (is_null($this->lastNode)) {
+            $this->lastNode = $data;
         }
     }
+    function insertLast($data) {
+        if (!is_null($this->firstNode)) {
+            $this->lastNode->next = $data;
+            $data->next = null;
+            $this->lastNode =$data;
+        }
+    }
+    public function addPatient($patient)
+    {
+        $current = $this->firstNode;
+        if ($this->firstNode == null ) {
+            $this->insertFirst($patient);
+        }
+        while (!is_null($current)) {
+            if (null == $current->next ) {
+                $this->insertLast($patient);
+                break;
 
+            }
+            if ($patient->code < $current->next->code) {
+                $patient->next = $current->next;
+                $current->next = $patient;
+                break;
+            }
+            $current = $current->next;
+        }
+    }
+    public function readList()
+    {
+        $listData = [];
+        $current = $this->firstNode;
+
+        while (!is_null($current)) {
+            array_push($listData, $current->readNode());
+            $current = $current->next;
+        }
+        return $listData;
+    }
     public function dequeue()
     {
-        if ($this->isEmpty()) {
-            return null;
-        }
-        $dequeueItem = [];
-        if (!empty($this->queueList[self::VIP1])){
-            $dequeueItem = array_shift($this->queueList[self::VIP1]);
-        } else if (!empty($this->queueList[self::VIP2])) {
-            $dequeueItem = array_shift($this->queueList[self::VIP2]);
-        } else if (!empty($this->queueList[self::VIP3])) {
-            $dequeueItem = array_shift($this->queueList[self::VIP3]);
-        } else if (!empty($this->queueList[self::NORMAL])) {
-            $dequeueItem = array_shift($this->queueList[self::NORMAL]);
-        } $this->size--;
-        return $dequeueItem;
+        $data = $this->firstNode->readNode();
+        $this->firstNode = $this->firstNode->next;
+        return $data;
     }
-
-
-
 }

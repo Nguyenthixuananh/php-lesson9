@@ -17,11 +17,7 @@ class Queue
 
     public function enqueue($data)
     {
-        if (!$this->isFull()) {
-            array_push($this->queue, $data);
-        } else {
-            echo "Queue is full";
-        }
+        array_push($this->queue, $data);
     }
 
 
@@ -31,16 +27,6 @@ class Queue
             echo "Stack is empty!!";
         } else {
             return array_shift($this->queue);
-        }
-    }
-
-//    Hien thi ptu tren cung
-    public function top()
-    {
-        if (!$this->iSEmpty()) {
-            return $this->queue[0];
-        }else {
-            return "Có gì đâu mà soi";
         }
     }
 

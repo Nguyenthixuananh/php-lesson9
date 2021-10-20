@@ -1,17 +1,13 @@
 <?php
-include_once 'Node.php';
-include_once 'Queue.php';
+include_once "Queue.php";
+$myBooks = new Queue();
 
-$queue = new Queue();
-$queue->enqueue(1);
-$queue->enqueue(2);
-$queue->enqueue(3);
-$queue->dequeue();
-$queue->dequeue();
-$queue->enqueue(4);
-$queue->enqueue(5);
-$queue->dequeue();
-$queue->dequeue();
-$queue->dequeue();
-echo '<pre>';
-print_r($queue);
+$myBooks->enqueue('Tony buoi sang');
+$myBooks->enqueue('Nha gia kim');
+$myBooks->enqueue('De men phieu luu ky');
+$myBooks->enqueue('Doi ngan dung ngu dai');
+$myBooks->enqueue('Hoang tu be');
+$myBooks->dequeue();
+
+echo "<pre>";
+print_r($myBooks);

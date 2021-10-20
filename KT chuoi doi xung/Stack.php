@@ -17,11 +17,7 @@ class Stack
 
     public function push($data)
     {
-        if (!$this->isFull()) {
-            array_unshift($this->stack, $data);
-        } else {
-            echo "Stack is full";
-        }
+        array_unshift($this->stack, $data);
     }
 
 
@@ -31,16 +27,6 @@ class Stack
             echo "Stack is empty!!";
         } else {
             return array_shift($this->stack);
-        }
-    }
-
-//    Hien thi ptu tren cung
-    public function top()
-    {
-        if (!$this->iSEmpty()) {
-            return $this->stack[0];
-        }else {
-            return "Có gì đâu mà soi";
         }
     }
 

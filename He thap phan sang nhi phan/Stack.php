@@ -2,14 +2,14 @@
 
 class Stack
 {
-    public $stack;
+    public array $stack;
     public $limit;
 
     /**
      * @param $stack
      * @param $limit
      */
-    public function __construct($limit=10)
+    public function __construct($limit = 10)
     {
         $this->stack = [];
         $this->limit = $limit;
@@ -34,25 +34,15 @@ class Stack
         }
     }
 
-//    Hien thi ptu tren cung
-    public function top()
-    {
-        if (!$this->iSEmpty()) {
-            return $this->stack[0];
-        }else {
-            return "Có gì đâu mà soi";
-        }
-    }
 
     public function iSEmpty()
     {
-        return count($this->stack)<=0;
+        return count($this->stack) <= 0;
     }
 
     public function isFull()
     {
         return count($this->stack) >= $this->limit;
     }
-
 
 }
